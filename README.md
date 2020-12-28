@@ -29,5 +29,5 @@ pip install -r requirements.txt
 - Start MongoDB server
 #### B. Python/FastAPI Backend
 ```bash
-uvicorn main:app --port=8005
+uvicorn main:app --port=9000
 ```
