@@ -36,7 +36,7 @@ class User(models.BaseUser):
         WARNING: You must also modify the same lines in the
         UserCreate model below
     """
-    
+
     firstName: str
     lastName: str
 
@@ -118,7 +118,7 @@ app = FastAPI()
 from fastapi.middleware.cors import CORSMiddleware
 origins = [
     "http://localhost",
-    "http://localhost:3000"
+    "http://localhost:3001"
 ]
 
 app.add_middleware(
@@ -128,7 +128,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"]
 )
-
 
 # --- User Authentication Routes ----------------------------------------------
 
@@ -157,12 +156,12 @@ app.include_router(
 
 # Add route for User utilities "/auth/users/*"
 
-""" 
+"""
     Get current logged in user profile          GET "/auth/users/me"
     Update current logged in user profile       PATCH "/auth/users/me"
     Get "_id" user profile                      GET "/auth/users/"
     Update "_id" user profile                   PATCH "/auth/users/{id}"
-    Delete "_id" user profile                   DELETE "/auth/users/{id}" 
+    Delete "_id" user profile                   DELETE "/auth/users/{id}"
 """
 
 app.include_router(
@@ -175,7 +174,7 @@ app.include_router(
 
 """
     Forgot Password                             POST /auth/users/forgot-password
-    Reset Password                              POST /auth/users/reset-password                         
+    Reset Password                              POST /auth/users/reset-password
 """
 
 app.include_router(
@@ -190,7 +189,7 @@ app.include_router(
 """
     The below templates can be used for creating any Rest APIs that are
     independent of user's authenticaion state (logged in or logged out).
-    
+
     Hence, these API calls don't necessarily require a user to be logged in.
 
     Please read Mongo Motor docs to perform async DB operations.
@@ -231,7 +230,7 @@ async def get_custom_protected_route(
 
 @app.post("/custom-protected-route", tags=["protected-routes"])
 async def post_custom_protected_route(
-    body: dict, 
+    body: dict,
     user: User = Depends(fastapi_users.get_current_user)
 ):
     # Add database CRUD operation logic here
